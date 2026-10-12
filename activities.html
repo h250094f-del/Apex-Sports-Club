@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Explore Apex Sports Club activities: football, basketball, gym, running, volleyball and upcoming events." />
+  <title>Activities &amp; Events | Apex Sports Club</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="assets/Apex icon.png" />
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand" aria-label="Apex Sports Club – home">
+        <img class="brand-image" src="assets/Apex logo.png" alt="" />
+      </a>
+      <nav class="main-nav" id="main-nav" aria-label="Primary navigation">
+        <ul>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About Us</a></li>
+          <li><a href="activities.html" class="nav-link active">Activities</a></li>
+          <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+          <li><a href="join.html" class="nav-link">Join Us</a></li>
+        </ul>
+      </nav>
+     
+    
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="activities.html">Activities &amp; Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="join.html">Join Us / Contact</a></li>
+      </ul>
+     
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- PAGE HERO -->
+    <section class="page-hero activities-hero">
+      <div class="container">
+        <span class="eyebrow">Get Involved</span>
+        <h1 class="section-title">FIND YOUR PACE.<br><span class="accent">PLAY YOUR GAME.</span></h1>
+        <p class="section-sub">From friendly matches to fitness challenges, discover ways to stay active, learn new skills and connect with the Apex community.</p>
+      </div>
+    </section>
+
+    <!-- SPORTS OVERVIEW (JS-rendered cards) -->
+    <section class="section bg-dark" aria-labelledby="sports-ov-title">
+      <div class="container text-center">
+        <span class="eyebrow">Disciplines Overview</span>
+        <h2 id="sports-ov-title" class="section-title">OUR CORE SPORTS</h2>
+        <p class="section-sub">Beginner workshops, weekly open sessions and competitive league rosters across all six disciplines.</p>
+        <div class="sports-grid" id="activities-sports-grid"><!-- rendered by main.js --></div>
+      </div>
+    </section>
+
+    <!-- EVENTS SECTION (JS-rendered + filter) -->
+    <section class="section bg-alt" aria-labelledby="events-ov-title">
+      <div class="container text-center">
+        <span class="eyebrow">Upcoming Schedule</span>
+        <h2 id="events-ov-title" class="section-title">CLUB FIXTURES &amp; SESSIONS</h2>
+        <p class="section-sub">Filter upcoming activities by sport. All university students are welcome to participate.</p>
+
+        <!-- Filter bar (buttons injected by JS) -->
+        <div class="filter-bar" id="filter-bar" role="tablist" aria-label="Event category filters"></div>
+
+        <!-- Events container -->
+        <div class="events-grid" id="events-grid"><!-- rendered by main.js --></div>
+
+        <!-- Empty state -->
+        <div class="empty-state" id="events-empty" style="display:none">
+          <h3>No sessions found</h3>
+          <p>No fixtures currently scheduled in this category. Check back soon!</p>
+          <button class="btn btn-outline btn-sm mt-2" id="reset-events-btn">View All Events</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- WEEKLY TIMETABLE (HTML table — ISE 2102 HTML requirement) -->
+    <section class="section bg-dark" aria-labelledby="timetable-title">
+      <div class="container">
+        <div class="text-center">
+          <span class="eyebrow">Regular Sessions</span>
+          <h2 id="timetable-title" class="section-title">WEEKLY TIMETABLE</h2>
+        </div>
+        <div class="table-wrap">
+          <table class="schedule-table">
+            <caption>Sample Weekly Training &amp; Open Session Timetable</caption>
+            <thead>
+              <tr>
+                <th scope="col">Day</th>
+                <th scope="col">Time</th>
+                <th scope="col">Sport</th>
+                <th scope="col">Session Type</th>
+                <th scope="col">Venue</th>
+                <th scope="col">Level</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Monday</strong></td><td>16:30-18:30</td><td>Football</td><td>Passing &amp; Tactical Drills</td><td>Football Pitch</td><td>All Abilities</td></tr>
+              <tr><td><strong>Tuesday</strong></td><td>17:00-18:30</td><td>Basketball</td><td>Shooting Clinics &amp; 3v3 Runs</td><td>Basketball Court</td><td>Beginner &amp; Intermediate</td></tr>
+              <tr><td><strong>Wednesday</strong></td><td>16:00-17:30</td><td>Gym &amp; Fitness</td><td>Strength Circuits &amp; Conditioning</td><td>H2</td><td>Open </td></tr>
+              <tr><td><strong>Thursday</strong></td><td>17:00-19:00</td><td>Volleyball</td><td>Serving, Spiking &amp; Scrimmage</td><td>Multi-Sport Court</td><td>Recreational</td></tr>
+              <tr><td><strong>Friday</strong></td><td>16:30-18:00</td><td>Running &amp; Track</td><td>Pace Group 5K &amp; Interval Work</td><td>Athletics Track</td><td>All Paces</td></tr>
+              <tr><td><strong>Saturday</strong></td><td>09:00-12:00</td><td>Social Sports</td><td>Interfaculty Games &amp; Tournaments</td><td>Main Sports Grounds</td><td>Community Fun</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-strip" aria-labelledby="act-cta">
+      <div class="container text-center cta-inner">
+        <span class="eyebrow">Ready to Play?</span>
+        <h2 id="act-cta" class="cta-title">DON'T SIT ON THE BENCH</h2>
+        <p>Membership gives you free access to all regular training sessions, club tournaments, fitness challenges and sports socials.</p>
+        <a href="join.html" class="btn btn-primary mt-3">Sign Up Today</a>
+      </div>
+    </section>
+
+  </main>
+ <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-grid container">
+      <div class="footer-brand">
+        <a href="index.html" class="brand footer-logo">
+          <img class="brand-image" src="assets/Apex logo.png" alt="Apex Fitness logo" />
+        </a>
+      </div>
+
+      <div>
+        <h3 class="footer-heading">Sports</h3>
+        <ul class="footer-nav">
+          <li><a href="activities.html#football">Football</a></li>
+          <li><a href="activities.html#basketball">Basketball</a></li>
+          <li><a href="activities.html#fitness">Gym &amp; Fitness</a></li>
+          <li><a href="activities.html#volleyball">Volleyball</a></li>
+          <li><a href="activities.html#running">Running &amp; Athletics</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-heading">Contact</h3>
+        <ul class="footer-contact">
+          <li>Location: Campus Sports Complex </li>
+          <li>Time: Mon-Fri · 16:30-19:30</li>
+        </ul>
+        <a href="join.html" class="btn btn-outline btn-sm mt-2">Send Enquiry</a>
+      </div>
+    </div>
+
+    <p class="footer-desc container">A student-led sports community fostering athletic excellence, healthy habits and inclusive camaraderie across all university faculties.</p>
+
+    <div class="footer-bottom container">
+      <span>&copy; <span id="year"></span> Apex Sports Club. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+</html>

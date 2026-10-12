@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Join Apex Sports Club - submit your student membership application or contact our committee." />
+  <title>Join Us | Apex Sports Club</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="assets/Apex icon.png" />
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand" aria-label="Apex Sports Club - home">
+        <img class="brand-image" src="assets/Apex logo.png" alt="" />
+      </a>
+      <nav class="main-nav" id="main-nav" aria-label="Primary navigation">
+        <ul>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About Us</a></li>
+          <li><a href="activities.html" class="nav-link">Activities</a></li>
+          <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+          <li><a href="join.html" class="nav-link active">Join Us</a></li>
+        </ul>
+      </nav>
+      
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="activities.html">Activities &amp; Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="join.html">Join Us / Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- PAGE HERO -->
+    <section class="page-hero join-hero">
+      <div class="container">
+        <span class="eyebrow">Your Move Starts Here</span>
+        <h1 class="section-title"><span class="hero-line">THERE'S A PLACE</span><br><span class="accent">FOR YOU AT APEX.</span></h1>
+        <p class="section-sub">Ready to get involved? Tell us a little about yourself and the activities you're interested in. Whether you're a beginner or an experienced athlete, we'd love to hear from you.</p>
+      </div>
+    </section>
+
+    <!-- FORM + SIDEBAR -->
+    <section class="section bg-dark" aria-labelledby="form-heading">
+      <div class="container join-layout">
+
+        <!-- ===== MEMBERSHIP FORM ===== -->
+        <div class="form-card">
+          <span class="eyebrow">Student Registration</span>
+          <h2 id="form-heading" class="section-title" style="font-size:1.8rem;margin-bottom:24px">MEMBERSHIP APPLICATION</h2>
+
+          <!-- JS validation alert -->
+          <div class="form-alert" id="form-alert" role="alert" aria-live="polite" style="display:none">
+            <strong>Please correct the highlighted issues:</strong>
+            <ul id="alert-list"></ul>
+          </div>
+
+          <!--
+            POST action goes to process.php — PHP backend.
+            JS validates first; on success the native POST fires.
+          -->
+          <form id="join-form" action="process.php" method="POST" novalidate>
+
+            <div class="form-grid">
+
+              <!-- Full Name -->
+              <div class="form-group">
+                <label for="full_name" class="form-label">Full Name <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="full_name" name="full_name" class="form-control"  maxlength="120" autocomplete="name" />
+                <span class="field-err" id="err-full_name">Please enter your full name (min 2 letters).</span>
+              </div>
+
+              <!-- Student Email -->
+              <div class="form-group">
+                <label for="email" class="form-label">Student Email <span class="req" aria-hidden="true">*</span></label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="e.g. h255555e@hit.ac.zw" autocomplete="email" />
+                <span class="field-err" id="err-email">Please enter a valid student email address.</span>
+              </div>
+
+              <!-- Student ID (optional) -->
+              <div class="form-group">
+                <label for="student_id" class="form-label">Student ID <small class="opt">(Optional)</small></label>
+                <input type="text" id="student_id" name="student_id" class="form-control" placeholder="e.g. h255555e" maxlength="8" />
+              </div>
+
+              <!-- Course -->
+              <div class="form-group">
+                <label for="course" class="form-label">Course / Department <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="course" name="course" class="form-control" placeholder=" eg Software Engineering" required maxlength="120" />
+                <span class="field-err" id="err-course">Please provide your course or department.</span>
+              </div>
+
+              <!-- Year of Study -->
+              <div class="form-group">
+                <label for="study_year" class="form-label">Year of Study <span class="req" aria-hidden="true">*</span></label>
+                <select id="study_year" name="study_year" class="form-control" required>
+                  <option value="">-- Select Year --</option>
+                  <option value="Year 1">Year 1 (Freshman)</option>
+                  <option value="Year 2">Year 2 (Sophomore)</option>
+                  <option value="Year 3">Year 3 (Junior)</option>
+                  <option value="Year 4">Year 4 (Senior)</option>
+                  <option value="Postgraduate / Other">Postgraduate / Other</option>
+                </select>
+                <span class="field-err" id="err-study_year">Please select your year of study.</span>
+              </div>
+
+              <!-- Preferred Activity -->
+              <div class="form-group">
+                <label for="preferred_activity" class="form-label">Preferred Activity <span class="req" aria-hidden="true">*</span></label>
+                <select id="preferred_activity" name="preferred_activity" class="form-control" required>
+                  <option value="">-- Select Activity --</option>
+                  <option value="Football">Football</option>
+                  <option value="Basketball">Basketball</option>
+                  <option value="Fitness">Gym &amp; Fitness</option>
+                  <option value="Running">Running &amp; Athletics</option>
+                  <option value="Volleyball">Volleyball</option>
+                  <option value="Multiple Activities">Multiple Activities</option>
+                  <option value="Other">Other / Social Sports</option>
+                </select>
+                <span class="field-err" id="err-preferred_activity">Please choose your preferred sport.</span>
+              </div>
+
+              <!-- Experience Level -->
+              <div class="form-group form-full">
+                <label class="form-label">Experience Level <span class="req" aria-hidden="true">*</span></label>
+                <div class="radio-group" role="radiogroup">
+                  <label class="radio-label"><input type="radio" name="experience_level" value="Beginner" checked /> Beginner</label>
+                  <label class="radio-label"><input type="radio" name="experience_level" value="Intermediate" /> Intermediate</label>
+                  <label class="radio-label"><input type="radio" name="experience_level" value="Experienced" /> Experienced</label>
+                </div>
+              </div>
+
+              <!-- Form Purpose -->
+              <div class="form-group form-full">
+                <label for="form_purpose" class="form-label">Submission Purpose <span class="req" aria-hidden="true">*</span></label>
+                <select id="form_purpose" name="form_purpose" class="form-control" required>
+                  <option value="Join the club">Join the club (General Membership)</option>
+                  <option value="Event enquiry">Event / Training Session Enquiry</option>
+                  <option value="Ask a question">Ask a question to the Committee</option>
+                </select>
+              </div>
+
+              <!-- Reason / Message -->
+              <div class="form-group form-full">
+                <label for="reason" class="form-label">Reason / Message <small class="opt">(Optional)</small></label>
+                <textarea id="reason" name="reason" class="form-control" rows="4" placeholder="Tell us about your fitness goals, positions played or what you hope to gain…" maxlength="600"></textarea>
+                <span class="field-err" id="err-reason">Message must not exceed 600 characters.</span>
+              </div>
+
+              <!-- Consent -->
+              <div class="form-group form-full">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="consent" name="consent" value="1" required />
+                  <span>I agree to allow Apex Sports Club to use my contact details to respond to this submission and communicate club session updates. <span class="req" aria-hidden="true">*</span></span>
+                </label>
+                <span class="field-err" id="err-consent">You must accept the consent agreement before submitting.</span>
+              </div>
+
+              <!-- Submit -->
+              <div class="form-group form-full" style="margin-top:8px">
+                <button type="submit" class="btn btn-primary btn-block">Submit Application</button>
+              </div>
+
+            </div><!-- /form-grid -->
+          </form>
+        </div><!-- /form-card -->
+
+        <!-- ===== SIDEBAR ===== -->
+        <aside class="join-sidebar" aria-label="Membership benefits and contact info">
+
+          <div class="info-card">
+            <span class="eyebrow">Why Join Us?</span>
+            <h3>MEMBER BENEFITS</h3>
+            <ul class="benefit-list">
+              <li><span class="tick" aria-hidden="true"></span><span><strong>Discover new sports:</strong> Try games with patient, encouraging peers.</span></li>
+              <li><span class="tick" aria-hidden="true"></span><span><strong>Meet your people:</strong> Connect with students sharing similar goals.</span></li>
+              <li><span class="tick" aria-hidden="true"></span><span><strong>Build skills &amp; confidence:</strong> Level up technique and game fitness.</span></li>
+              <li><span class="tick" aria-hidden="true"></span><span><strong>Competitions &amp; socials:</strong> Friendly tournaments and campus meetups.</span></li>
+            </ul>
+          </div>
+
+          <div class="info-card">
+            <span class="eyebrow">Direct Contact</span>
+            <h3>CLUB OFFICE</h3>
+            <ul class="footer-contact" style="margin-bottom:16px">
+              <li>S2 Sports Director Office <small class="opt"></small></li>
+              <li>sportsclub@hit.ac.zw</li>
+              <li>+263-784 235 897<small class="opt"></small></li>
+            </ul>
+          </div>
+
+        </aside>
+
+      </div><!-- /join-layout -->
+    </section>
+
+  </main>
+
+    <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-grid container">
+      <div class="footer-brand">
+        <a href="index.html" class="brand footer-logo">
+          <img class="brand-image" src="assets/Apex logo.png" alt="Apex Fitness logo" />
+        </a>
+      </div>
+
+      <div>
+        <h3 class="footer-heading">Sports</h3>
+        <ul class="footer-nav">
+          <li><a href="activities.html#football">Football</a></li>
+          <li><a href="activities.html#basketball">Basketball</a></li>
+          <li><a href="activities.html#fitness">Gym &amp; Fitness</a></li>
+          <li><a href="activities.html#volleyball">Volleyball</a></li>
+          <li><a href="activities.html#running">Running &amp; Athletics</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-heading">Contact</h3>
+        <ul class="footer-contact">
+          <li>Location: Campus Sports Complex </li>
+          <li>Time: Mon-Fri · 16:30-19:30</li>
+        </ul>
+        <a href="join.html" class="btn btn-outline btn-sm mt-2">Send Enquiry</a>
+      </div>
+    </div>
+
+    <p class="footer-desc container">A student-led sports community fostering athletic excellence, healthy habits and inclusive camaraderie across all university faculties.</p>
+
+    <div class="footer-bottom container">
+      <span>&copy; <span id="year"></span> Apex Sports Club. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+</html>

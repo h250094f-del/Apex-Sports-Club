@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Apex Sports Club photo gallery – football, basketball, gym, running, volleyball and community moments." />
+  <title>Gallery | Apex Sports Club</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="assets/Apex icon.png" />
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand" aria-label="Apex Sports Club – home">
+        <img class="brand-image" src="assets/Apex logo.png" alt="" />
+      </a>
+      <nav class="main-nav" id="main-nav" aria-label="Primary navigation">
+        <ul>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About Us</a></li>
+          <li><a href="activities.html" class="nav-link">Activities</a></li>
+          <li><a href="gallery.html" class="nav-link active">Gallery</a></li>
+          <li><a href="join.html" class="nav-link">Join Us</a></li>
+        </ul>
+      </nav>
+      
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="activities.html">Activities &amp; Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="join.html">Join Us / Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- PAGE HERO -->
+    <section class="page-hero gallery-hero">
+      <div class="container">
+        <span class="eyebrow">Moments That Move Us</span>
+        <h1 class="section-title">THE GAME IS BETTER<br><span class="accent">TOGETHER.</span></h1>
+        <p class="section-sub">Every session brings a new challenge, a new connection and a new memory. Explore the spirit of sports and fitness at Apex.</p>
+      </div>
+    </section>
+
+    <!-- GALLERY GRID (JS-rendered) -->
+    <section class="section bg-dark" aria-labelledby="gallery-title">
+      <div class="container text-center">
+        <span class="eyebrow">Visual Highlights</span>
+        <h2 id="gallery-title" class="section-title">PHOTO ARCHIVE</h2>
+        <p class="section-sub">Browse through training sessions, matches and community celebrations. Click any photo to enlarge.</p>
+      
+        <!-- Gallery filter -->
+        <div class="filter-bar" id="gallery-filter-bar" role="tablist" aria-label="Gallery category filters"></div>
+
+        <!-- Gallery grid -->
+        <div class="gallery-grid" id="gallery-grid"><!-- rendered by main.js --></div>
+
+        <!-- Empty state -->
+        <div class="empty-state" id="gallery-empty" style="display:none">
+          <h3>No photos found</h3>
+          <p>No images in this category. Check back soon for fresh match photos!</p>
+          <button class="btn btn-outline btn-sm mt-2" id="reset-gallery-btn">View All Photos</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- LIGHTBOX (markup stays in HTML; JS manages visibility) -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" style="display:none">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" id="lb-close" aria-label="Close">&times;</button>
+      <button class="lightbox-nav lb-prev" id="lb-prev" aria-label="Previous photo">&lt;</button>
+      <button class="lightbox-nav lb-next" id="lb-next" aria-label="Next photo">&gt;</button>
+      <div class="lb-img-wrap">
+        <img src="" alt="" id="lb-img" />
+      </div>
+      <div class="lb-caption">
+        <h3 class="lb-title" id="lb-title"></h3>
+        <span class="lb-cat" id="lb-cat"></span>
+        <p class="lb-desc" id="lb-desc"></p>
+      </div>
+    </div>
+  </div>
+
+ <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-grid container">
+      <div class="footer-brand">
+        <a href="index.html" class="brand footer-logo">
+          <img class="brand-image" src="assets/Apex logo.png" alt="Apex Fitness logo" />
+        </a>
+      </div>
+
+      <div>
+        <h3 class="footer-heading">Sports</h3>
+        <ul class="footer-nav">
+          <li><a href="activities.html#football">Football</a></li>
+          <li><a href="activities.html#basketball">Basketball</a></li>
+          <li><a href="activities.html#fitness">Gym &amp; Fitness</a></li>
+          <li><a href="activities.html#volleyball">Volleyball</a></li>
+          <li><a href="activities.html#running">Running &amp; Athletics</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-heading">Contact</h3>
+        <ul class="footer-contact">
+          <li>Location: Campus Sports Complex </li>
+          <li>Time: Mon-Fri · 16:30-19:30</li>
+        </ul>
+        <a href="join.html" class="btn btn-outline btn-sm mt-2">Send Enquiry</a>
+      </div>
+    </div>
+
+    <p class="footer-desc container">A student-led sports community fostering athletic excellence, healthy habits and inclusive camaraderie across all university faculties.</p>
+
+    <div class="footer-bottom container">
+      <span>&copy; <span id="year"></span> Apex Sports Club. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
