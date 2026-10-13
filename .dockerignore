@@ -1,8 +1,0 @@
-.git
-.github
-.gitignore
-Dockerfile
-docker-compose.yml
-render.yaml
-README.md
-DEPLOYMENT.md
