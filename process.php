@@ -90,6 +90,31 @@ if ($fp !== false) {
     fputcsv($fp, $row);
     fclose($fp);
 }
+
+// Save to SQL Database (SQLite or PostgreSQL)
+try {
+    require_once __DIR__ . '/db.php';
+    $db = get_db_connection();
+    $stmt = $db->prepare("
+        INSERT INTO members (submitted_at, full_name, email, course, study_year, preferred_activity, experience_level, form_purpose, reason, consent)
+        VALUES (:submitted_at, :full_name, :email, :course, :study_year, :preferred_activity, :experience_level, :form_purpose, :reason, :consent)
+    ");
+    $stmt->execute([
+        ':submitted_at' => date('c'),
+        ':full_name' => $fullName,
+        ':email' => $email,
+        ':course' => $course,
+        ':study_year' => $studyYear,
+        ':preferred_activity' => $preferredActivity,
+        ':experience_level' => $experienceLevel,
+        ':form_purpose' => $formPurpose,
+        ':reason' => $reason,
+        ':consent' => $consent ? 'yes' : 'no'
+    ]);
+} catch (Exception $e) {
+    // Log database error silently without breaking user receipt confirmation
+    error_log("DB insert failed: " . $e->getMessage());
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

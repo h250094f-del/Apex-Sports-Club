@@ -1,4 +1,5 @@
 # Prevent submissions with real user data from being committed to git
 submissions.csv
+data/
 .DS_Store
 Thumbs.db
