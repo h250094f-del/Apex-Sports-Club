@@ -341,7 +341,6 @@ $pendingCount = (int)$pendingQuery->fetch()['pending'];
     <header class="admin-topbar">
       <div class="brand-title">
         <h1>Apex Sports Club — Admin Portal</h1>
-        <p>Student Club Database Management &amp; Form Submissions (ISE 2102)</p>
       </div>
       <div class="admin-session">
         <a href="index.html" class="btn-action btn-public">&larr; Public Website</a>
