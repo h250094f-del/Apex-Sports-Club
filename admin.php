@@ -1,7 +1,6 @@
 <?php
 /**
  * Apex Sports Club — Administrator Records Dashboard
- * ISE 2102: Web Technologies Semester Project
  * Requirement E:
  * - Retrieves submitted student records from MySQL database `members` table
  * - Allows searching, filtering by sport, updating status, and deleting records
@@ -103,13 +102,13 @@ $pendingCount = (int)$pendingQuery->fetch()['pending'];
   <style>
     body {
       margin: 0;
-      background: #09130d;
-      color: #edf7ee;
-      font-family: Inter, Arial, sans-serif;
-      padding: 30px 16px;
+      background: var(--bg-dark, #09130d);
+      color: var(--text-main, #edf7ee);
+      font-family: var(--font-body, Inter, Arial, sans-serif);
+      padding: 36px 20px;
     }
     .admin-container {
-      max-width: 1280px;
+      max-width: 1320px;
       margin: 0 auto;
     }
     .admin-topbar {
@@ -118,20 +117,16 @@ $pendingCount = (int)$pendingQuery->fetch()['pending'];
       align-items: center;
       flex-wrap: wrap;
       gap: 16px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid rgba(123, 255, 146, 0.2);
-      margin-bottom: 26px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--border, rgba(123, 255, 146, 0.2));
+      margin-bottom: 28px;
     }
     .brand-title h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.8rem;
-      margin: 0 0 4px;
-      color: #edf7ee;
-    }
-    .brand-title p {
+      font-family: var(--font-head, 'Space Grotesk', sans-serif);
+      font-size: 1.85rem;
       margin: 0;
-      font-size: 0.88rem;
-      color: #a4baa9;
+      color: var(--text-main, #edf7ee);
+      letter-spacing: -0.01em;
     }
     .admin-session {
       display: flex;
@@ -140,32 +135,33 @@ $pendingCount = (int)$pendingQuery->fetch()['pending'];
       flex-wrap: wrap;
     }
     .user-tag {
-      background: rgba(97, 224, 124, 0.12);
-      border: 1px solid rgba(97, 224, 124, 0.3);
-      color: #9ef2a6;
-      font-size: 0.84rem;
-      padding: 6px 14px;
+      background: rgba(56, 229, 77, 0.12);
+      border: 1px solid rgba(56, 229, 77, 0.3);
+      color: var(--green-soft, #9ef2a6);
+      font-size: 0.85rem;
+      padding: 7px 15px;
       border-radius: 999px;
       font-weight: 600;
     }
     .btn-action {
       display: inline-block;
-      padding: 7px 16px;
+      padding: 7px 18px;
       border-radius: 999px;
       text-decoration: none;
-      font-size: 0.85rem;
+      font-size: 0.86rem;
       font-weight: 600;
-      transition: all 0.15s ease;
+      transition: all var(--ease-normal, 0.2s ease);
       cursor: pointer;
     }
     .btn-public {
       background: transparent;
       border: 1px solid rgba(255, 255, 255, 0.25);
-      color: #edf7ee;
+      color: var(--text-main, #edf7ee);
     }
     .btn-public:hover {
-      border-color: #61e07c;
-      color: #61e07c;
+      border-color: var(--green-acc, #61e07c);
+      color: var(--green-acc, #61e07c);
+      transform: translateY(-1px);
     }
     .btn-logout {
       background: rgba(255, 77, 77, 0.15);
@@ -174,163 +170,201 @@ $pendingCount = (int)$pendingQuery->fetch()['pending'];
     }
     .btn-logout:hover {
       background: rgba(255, 77, 77, 0.3);
+      transform: translateY(-1px);
     }
-    /* Stats Grid */
+    .alert-banner {
+      background: rgba(56, 229, 77, 0.15);
+      border: 1px solid rgba(56, 229, 77, 0.4);
+      color: var(--green-soft, #9ef2a6);
+      padding: 12px 18px;
+      border-radius: var(--radius-sm, 8px);
+      margin-bottom: 24px;
+      font-size: 0.92rem;
+    }
+
+    /* Stats Grid — Nicely balanced 3-column layout */
     .kpi-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+    @media (max-width: 860px) {
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
     }
     .kpi-card {
-      background: rgba(18, 32, 22, 0.95);
-      border: 1px solid rgba(123, 255, 146, 0.2);
-      border-radius: 14px;
-      padding: 20px 22px;
+      background: var(--bg-card, rgba(18, 32, 22, 0.95));
+      border: 1px solid var(--border, rgba(123, 255, 146, 0.2));
+      border-radius: var(--radius-md, 14px);
+      padding: 24px 26px;
+      box-shadow: var(--shadow-sm, 0 4px 18px rgba(0, 0, 0, 0.2));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .kpi-card:hover {
+      border-color: var(--green-acc, #61e07c);
+      transform: translateY(-2px);
     }
     .kpi-num {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 2.2rem;
+      font-family: var(--font-head, 'Space Grotesk', sans-serif);
+      font-size: 2.6rem;
       font-weight: 800;
-      color: #61e07c;
+      color: var(--green-acc, #61e07c);
       line-height: 1;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
     }
     .kpi-label {
-      font-size: 0.82rem;
-      color: #a4baa9;
+      font-size: 0.85rem;
+      color: var(--text-muted, #a4baa9);
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       font-weight: 600;
     }
+
     /* Filters */
     .filter-bar {
-      background: rgba(18, 32, 22, 0.8);
-      border: 1px solid rgba(123, 255, 146, 0.18);
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin-bottom: 24px;
+      background: var(--bg-card, rgba(18, 32, 22, 0.8));
+      border: 1px solid var(--border, rgba(123, 255, 146, 0.18));
+      border-radius: var(--radius-md, 12px);
+      padding: 16px 22px;
+      margin-bottom: 26px;
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 14px;
       align-items: center;
       justify-content: space-between;
     }
     .filter-form {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 12px;
       align-items: center;
       flex: 1;
     }
     .input-sm {
-      padding: 8px 12px;
-      border-radius: 6px;
-      border: 1px solid rgba(123, 255, 146, 0.25);
-      background: rgba(9, 19, 13, 0.9);
-      color: #edf7ee;
-      font-size: 0.88rem;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm, 8px);
+      border: 1px solid var(--border, rgba(123, 255, 146, 0.25));
+      background: rgba(9, 19, 13, 0.95);
+      color: var(--text-main, #edf7ee);
+      font-size: 0.9rem;
+      font-family: var(--font-body, inherit);
+    }
+    .input-sm:focus {
+      outline: none;
+      border-color: var(--green-acc, #61e07c);
+      box-shadow: 0 0 0 2px rgba(56, 229, 77, 0.2);
     }
     .btn-filter {
-      padding: 8px 16px;
-      background: #61e07c;
+      padding: 10px 20px;
+      background: var(--green-acc, #61e07c);
       color: #07130a;
       border: none;
-      border-radius: 6px;
+      border-radius: var(--radius-sm, 8px);
       font-weight: 700;
       cursor: pointer;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
+      font-family: var(--font-body, inherit);
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+    .btn-filter:hover {
+      background: var(--green-soft, #7bff92);
+      transform: translateY(-1px);
     }
     .btn-reset {
-      color: #a4baa9;
+      color: var(--text-muted, #a4baa9);
       text-decoration: none;
-      font-size: 0.84rem;
-      margin-left: 6px;
+      font-size: 0.86rem;
+      margin-left: 8px;
+      font-weight: 500;
     }
-    /* Table */
-    .table-card {
-      background: rgba(18, 32, 22, 0.95);
-      border: 1px solid rgba(123, 255, 146, 0.2);
-      border-radius: 14px;
-      overflow-x: auto;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
+    .btn-reset:hover {
+      color: var(--green-soft, #9ef2a6);
+      text-decoration: underline;
     }
-    table {
+
+    /* Table & Container Matching Activities Schedule Table */
+    .schedule-table-card {
       width: 100%;
       border-collapse: collapse;
+      font-size: 0.94rem;
       text-align: left;
-      min-width: 900px;
     }
-    th, td {
-      padding: 13px 15px;
-      border-bottom: 1px solid rgba(123, 255, 146, 0.1);
-      font-size: 0.88rem;
+    .schedule-table-card caption {
+      padding: 18px 24px;
+      font-family: var(--font-head, 'Space Grotesk', sans-serif);
+      font-weight: 700;
+      font-size: 1.15rem;
+      text-transform: uppercase;
+      color: var(--green-acc, #61e07c);
+      background: rgba(13, 23, 11, 0.85);
+      border-bottom: 1px solid var(--border, rgba(123, 255, 146, 0.2));
+      text-align: left;
+      letter-spacing: 0.04em;
+    }
+    .schedule-table-card th,
+    .schedule-table-card td {
+      padding: 15px 20px;
+      border-bottom: 1px solid var(--border, rgba(123, 255, 146, 0.2));
       vertical-align: middle;
     }
-    th {
-      background: rgba(25, 45, 30, 0.9);
-      color: #9ef2a6;
-      font-weight: 600;
-      text-transform: uppercase;
-      font-size: 0.74rem;
+    .schedule-table-card th {
+      background: rgba(56, 229, 77, 0.12);
+      font-family: var(--font-head, 'Space Grotesk', sans-serif);
+      font-weight: 700;
+      color: var(--green-soft, #9ef2a6);
       letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
     }
-    tr:hover td {
-      background: rgba(97, 224, 124, 0.04);
+    .schedule-table-card tr:hover td {
+      background: rgba(56, 229, 77, 0.06);
     }
+
+    /* Table Details and Badges */
     .badge-sport {
       display: inline-block;
-      padding: 3px 8px;
+      padding: 4px 10px;
       border-radius: 999px;
-      font-size: 0.74rem;
+      font-size: 0.76rem;
       font-weight: 600;
-      background: rgba(97, 224, 124, 0.15);
-      color: #61e07c;
-      border: 1px solid rgba(97, 224, 124, 0.3);
-    }
-    .badge-status {
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      font-weight: 600;
-      background: rgba(255, 193, 7, 0.15);
-      color: #ffc107;
-      border: 1px solid rgba(255, 193, 7, 0.3);
-    }
-    .badge-approved {
-      background: rgba(97, 224, 124, 0.2);
-      color: #61e07c;
-      border-color: rgba(97, 224, 124, 0.4);
-    }
-    .alert-banner {
-      background: rgba(97, 224, 124, 0.15);
-      border: 1px solid rgba(97, 224, 124, 0.4);
-      color: #9ef2a6;
-      padding: 12px 18px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      font-size: 0.9rem;
+      background: rgba(56, 229, 77, 0.15);
+      color: var(--green-acc, #61e07c);
+      border: 1px solid rgba(56, 229, 77, 0.35);
     }
     .status-select {
-      padding: 4px 6px;
-      background: #09130d;
-      color: #edf7ee;
-      border: 1px solid rgba(123, 255, 146, 0.3);
-      border-radius: 4px;
-      font-size: 0.78rem;
+      padding: 6px 10px;
+      background: rgba(9, 19, 13, 0.95);
+      color: var(--text-main, #edf7ee);
+      border: 1px solid var(--border, rgba(123, 255, 146, 0.3));
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-family: var(--font-body, inherit);
+      cursor: pointer;
+    }
+    .status-select:focus {
+      outline: none;
+      border-color: var(--green-acc, #61e07c);
     }
     .btn-delete {
       background: transparent;
-      border: 1px solid rgba(255, 77, 77, 0.4);
+      border: 1px solid rgba(255, 77, 77, 0.45);
       color: #ff9999;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 0.74rem;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
       cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease;
     }
     .btn-delete:hover {
-      background: rgba(255, 77, 77, 0.25);
+      background: rgba(255, 77, 77, 0.22);
+      border-color: rgba(255, 77, 77, 0.8);
     }
   </style>
 </head>
@@ -340,7 +374,7 @@ $pendingCount = (int)$pendingQuery->fetch()['pending'];
     <!-- Topbar -->
     <header class="admin-topbar">
       <div class="brand-title">
-        <h1>Apex Sports Club — Admin Portal</h1>
+        <h1>Admin Dashboard</h1>
       </div>
       <div class="admin-session">
         <a href="index.html" class="btn-action btn-public">&larr; Public Website</a>
@@ -357,7 +391,7 @@ $pendingCount = (int)$pendingQuery->fetch()['pending'];
       </div>
     <?php endif; ?>
 
-    <!-- KPI Aggregates -->
+    <!-- KPI Aggregates — Clean 3-Card Grid -->
     <section class="kpi-grid">
       <div class="kpi-card">
         <div class="kpi-num"><?php echo $totalApplicants; ?></div>
@@ -371,10 +405,6 @@ $pendingCount = (int)$pendingQuery->fetch()['pending'];
         <div class="kpi-num"><?php echo count($sportsStats); ?></div>
         <div class="kpi-label">Active Sports Disciplines</div>
       </div>
-      <div class="kpi-card">
-        <div class="kpi-num" style="font-size:1.6rem;padding-top:6px;">MySQL / PDO</div>
-        <div class="kpi-label">Backend Database Active</div>
-      </div>
     </section>
 
     <!-- Search & Filter Controls -->
@@ -383,10 +413,10 @@ $pendingCount = (int)$pendingQuery->fetch()['pending'];
         <input
           type="text"
           name="search"
-          placeholder="Search name, email, student ID..."
+          placeholder="Search name, email, student ID, course..."
           value="<?php echo htmlspecialchars($search); ?>"
           class="input-sm"
-          style="min-width: 260px;"
+          style="min-width: 280px;"
         />
         <select name="sport" class="input-sm">
           <option value="">-- All Sports --</option>
@@ -400,46 +430,47 @@ $pendingCount = (int)$pendingQuery->fetch()['pending'];
         </select>
         <button type="submit" class="btn-filter">Filter Records</button>
         <?php if ($search !== '' || $filterSport !== ''): ?>
-          <a href="admin.php" class="btn-reset">Reset</a>
+          <a href="admin.php" class="btn-reset">Reset Filter</a>
         <?php endif; ?>
       </form>
       <div>
-        <span style="font-size:0.85rem;color:#a4baa9;">Showing: <strong><?php echo count($members); ?></strong> records</span>
+        <span style="font-size:0.88rem;color:var(--text-muted, #a4baa9);">Showing: <strong style="color:var(--green-soft, #9ef2a6);"><?php echo count($members); ?></strong> applicant<?php echo count($members) === 1 ? '' : 's'; ?></span>
       </div>
     </section>
 
-    <!-- Members Table (ISE 2102 Requirement E: Store & Retrieve) -->
-    <main class="table-card">
+    <!-- Members Table — Styled identically to activities.html schedule-table -->
+    <main class="table-wrap">
       <?php if (empty($members)): ?>
-        <p style="padding: 36px; text-align: center; color: #a4baa9;">
-          No student applications match the query. Form submissions from <code>join.html</code> will automatically populate this database table.
+        <p style="padding: 40px; text-align: center; color: var(--text-muted, #a4baa9); margin: 0;">
+          No student applications match the query. Form submissions from <code>join.html</code> will automatically appear here.
         </p>
       <?php else: ?>
-        <table>
+        <table class="schedule-table schedule-table-card">
+          <caption>Student Membership Applications &amp; Registrations</caption>
           <thead>
             <tr>
-              <th>#</th>
-              <th>Submitted</th>
-              <th>Student Name</th>
-              <th>Email</th>
-              <th>Student ID</th>
-              <th>Course / Dept</th>
-              <th>Year</th>
-              <th>Sport</th>
-              <th>Level</th>
-              <th>Status</th>
-              <th>Message</th>
-              <th>Actions</th>
+              <th scope="col">#</th>
+              <th scope="col">Submitted</th>
+              <th scope="col">Student Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Student ID</th>
+              <th scope="col">Course / Dept</th>
+              <th scope="col">Year</th>
+              <th scope="col">Sport</th>
+              <th scope="col">Level</th>
+              <th scope="col">Status</th>
+              <th scope="col">Message / Goals</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
             <?php foreach ($members as $m): ?>
               <tr>
-                <td><?php echo (int)$m['id']; ?></td>
-                <td><small><?php echo htmlspecialchars(substr((string)$m['submitted_at'], 0, 16)); ?></small></td>
+                <td><strong><?php echo (int)$m['id']; ?></strong></td>
+                <td><small style="color:var(--text-muted, #a4baa9);"><?php echo htmlspecialchars(substr((string)$m['submitted_at'], 0, 16)); ?></small></td>
                 <td><strong><?php echo htmlspecialchars($m['full_name']); ?></strong></td>
-                <td><a href="mailto:<?php echo htmlspecialchars($m['email']); ?>" style="color:#9ef2a6;"><?php echo htmlspecialchars($m['email']); ?></a></td>
-                <td><code><?php echo htmlspecialchars($m['student_id'] ?: '—'); ?></code></td>
+                <td><a href="mailto:<?php echo htmlspecialchars($m['email']); ?>" style="color:var(--green-soft, #9ef2a6);text-decoration:none;"><?php echo htmlspecialchars($m['email']); ?></a></td>
+                <td><code style="background:rgba(56,229,77,0.12);padding:2px 6px;border-radius:4px;color:var(--green-soft,#9ef2a6);"><?php echo htmlspecialchars($m['student_id'] ?: '—'); ?></code></td>
                 <td><?php echo htmlspecialchars($m['course']); ?></td>
                 <td><?php echo htmlspecialchars($m['study_year']); ?></td>
                 <td><span class="badge-sport"><?php echo htmlspecialchars($m['preferred_activity']); ?></span></td>
@@ -456,7 +487,7 @@ $pendingCount = (int)$pendingQuery->fetch()['pending'];
                     </select>
                   </form>
                 </td>
-                <td><small style="color:#a4baa9;"><?php echo htmlspecialchars($m['reason'] ?: 'None'); ?></small></td>
+                <td><small style="color:var(--text-muted, #a4baa9);"><?php echo htmlspecialchars($m['reason'] ?: 'None'); ?></small></td>
                 <td>
                   <form method="POST" action="admin.php" onsubmit="return confirm('Permanently delete applicant #<?php echo (int)$m['id']; ?>?');" style="margin:0;">
                     <input type="hidden" name="action" value="delete" />
