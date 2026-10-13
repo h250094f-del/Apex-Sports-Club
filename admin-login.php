@@ -233,7 +233,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 
     <div class="credentials-hint">
-      <strong>Default Admin Credentials (ISE 2102):</strong><br>
+      <strong>Default Admin Credentials :</strong><br>
       Username: <code>admin</code><br>
       Password: <code>Password123!</code>
     </div>
