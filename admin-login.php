@@ -1,7 +1,6 @@
 <?php
 /**
  * Apex Sports Club — Staff & Administrator Login Portal
- * ISE 2102: Web Technologies Semester Project
  * Requirement E & F:
  * - Authenticates administrator against MySQL database `admins` table
  * - Uses secure password_verify() with Bcrypt hashing
@@ -193,7 +192,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <img src="assets/Apex logo.png" alt="Apex Sports Club Logo" />
       </a>
       <h1 class="login-title">Staff &amp; Admin Portal</h1>
-      <p class="login-sub">ISE 2102 — Student Club Records Management</p>
+      <p class="login-sub">Student Club Records Management</p>
     </div>
 
     <?php if ($error !== ''): ?>
